@@ -16,6 +16,9 @@ namespace Alraune
 
         public string GetModified(string text)
         {
+            if (string.IsNullOrWhiteSpace(text))
+                return text;
+
             if (FontChara.Count == 0)
                 return text.Replace(Environment.NewLine, "<CR>");
 
@@ -25,6 +28,9 @@ namespace Alraune
 
         public string GetOriginal(string text)
         {
+            if (string.IsNullOrWhiteSpace(text))
+                return text;
+
             if (FontChara.Count == 0)
                 return text.Replace("<CR>", Environment.NewLine);
 
@@ -50,7 +56,7 @@ namespace Alraune
                 }
                 catch (Exception e)
                 {
-                    return (false, "The dictionary is wrong, please, check the readme and fix it.");
+                    return (false, $"The dictionary is wrong, please, check the readme and fix it.\n{e.Message}");
                 }
             }
             else

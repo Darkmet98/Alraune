@@ -13,12 +13,13 @@ namespace Alraune
     {
         public string Name { get; set; }
         public string Value { get; set; }
+        public string ValueOri { get; set; }
         public override string ToString()
         {
             return Name;
         }
     }
-    enum AceptedXml
+    enum AcceptedAtributesXml
     {
         effect_name,
         description,

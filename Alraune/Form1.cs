@@ -13,15 +13,21 @@ namespace Alraune
         private List<XmlNodeGust> nodes;
         private XmlDocument doc;
         private StringReplacer replacer;
+        private string oriPath;
+        private bool modified;
+
         public Form1()
         {
             InitializeComponent();
             nodes = new List<XmlNodeGust>();
             replacer = new StringReplacer();
+            if (File.Exists("Dictionary.map"))
+                LoadDictionary("Dictionary.map");
         }
 
         private void LoadXml(string path)
         {
+            oriPath = path;
             nodes.Clear();
             doc = new XmlDocument();
             var attributes = new List<XmlAttributeGust>();
@@ -31,16 +37,31 @@ namespace Alraune
             foreach (XmlNode entry in doc.DocumentElement.ChildNodes)
             {
                 attributes.Clear();
-                foreach (var aceptedXml in (string[])Enum.GetNames(typeof(AceptedXml)))
+                foreach (var aceptedXml in (string[])Enum.GetNames(typeof(AcceptedAtributesXml)))
                 {
                     var e = entry.Attributes?[aceptedXml];
 
                     if (e != null)
-                        attributes.Add(new XmlAttributeGust()
+                    {
+                        var ori = entry.Attributes?[aceptedXml + "_ori"];
+
+                        if (ori == null)
+                            attributes.Add(new XmlAttributeGust()
+                            {
+                                ValueOri = e.Value,
+                                Name = e.Name
+                            });
+                        else
                         {
-                            Value = e.Value,
-                            Name = e.Name
-                        });
+                            attributes.Add(new XmlAttributeGust()
+                            {
+                                ValueOri = ori.Value,
+                                Value = ori.Value == e.Value ? "" : e.Value,
+                                Name = e.Name
+                            });
+                        }
+                            
+                    }
                 }
                 
                 if (attributes.Count == 0)
@@ -89,14 +110,38 @@ namespace Alraune
             if (nodes.Count == 0)
                 return;
 
+
+            if (modified)
+            {
+                var dialogResult = MessageBox.Show("You have modified the translation.\nDo you want to change the entry without saving your text?", "Translation modified", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+                
+            }
+
             attributeXmlList.DataSource = nodes[Convert.ToInt32(entryIndex.Value - 1)].Attributes;
             FillText();
         }
 
         private void FillText()
         {
+
+            if (modified)
+            {
+                var dialogResult = MessageBox.Show("You have modified the translation.\nDo you want to change the entry without saving your text?", "Translation modified", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
             var x = attributeXmlList.SelectedItem as XmlAttributeGust;
             xmlAttributeText.Text = replacer.GetOriginal(x?.Value);
+            xmlOriAttributeText.Text = replacer.GetOriginal(x?.ValueOri);
+            modified = false;
+            labelTranslated.Text = "Translated";
             UpdateInfo();
         }
 
@@ -106,9 +151,34 @@ namespace Alraune
             totalLabel.Text = $@"Total: {xmlAttributeText.Text.Length}";
             var current = xmlAttributeText.GetLineFromCharIndex(xmlAttributeText.SelectionStart);
             currentLineLabel.Text = $@"Current line: {current + 1}";
+            if (xmlAttributeText.Lines.Length == 0)
+                return;
             charaCountLabel.Text =
                 $@"Characters: {xmlAttributeText.Lines[current].Length}";
         }
+
+        private void LoadDictionary(string path)
+        {
+            var result = replacer.GenerateFontMap(path);
+            if (!result.Item1)
+            {
+                MessageBox.Show(result.Item2, "Error loading Map file.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+
+            dictionaryLabel.Text = $"Dictionary: {(result.Item1 ? "Yes" : "No")}";
+        }
+
+        private void SaveTranslation()
+        {
+            var x = attributeXmlList.SelectedItem as XmlAttributeGust;
+            x.Value = replacer.GetModified(xmlAttributeText.Text);
+            labelTranslated.Text = "Translated";
+            modified = false;
+        }
+
+        #region Winforms_Actions
 
         private void attributeXmlList_Click(object sender, EventArgs e)
         {
@@ -119,6 +189,8 @@ namespace Alraune
         {
             UpdateBox();
         }
+
+
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
         {
@@ -143,7 +215,49 @@ namespace Alraune
 
         private void xmlAttributeText_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-           UpdateInfo();
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Enter)
+            {
+                SaveTranslation();
+                return;
+            }
+
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Left)
+            {
+                if (entryIndex.Value == 1)
+                    return;
+
+                entryIndex.Value--;
+                return;
+            }
+
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Right)
+            {
+                if (entryIndex.Value == entryIndex.Maximum)
+                    return;
+
+                entryIndex.Value++;
+                return;
+            }
+
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Up)
+            {
+                if (attributeXmlList.SelectedIndex == 0)
+                    return;
+                attributeXmlList.SelectedIndex--;
+                FillText();
+                return;
+            }
+
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Down)
+            {
+                if (attributeXmlList.SelectedIndex == attributeXmlList.Items.Count-1)
+                    return;
+                attributeXmlList.SelectedIndex++;
+                FillText();
+                return;
+            }
+
+            UpdateInfo();
         }
 
         private void xmlAttributeText_Click(object sender, EventArgs e)
@@ -160,6 +274,7 @@ namespace Alraune
             {
                 return false;
             }
+
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -179,17 +294,51 @@ namespace Alraune
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                LoadDictionary(openFileDialog1.FileName);
+        }
+
+        private void updateEntryButton_Click(object sender, EventArgs e)
+        {
+            SaveTranslation();
+        }
+
+        private void saveXmlButton_Click(object sender, EventArgs e)
+        {
+            // Make a backup
+            doc.Save(oriPath + $"_{DateTime.Now:dd-MM-yyyy HH-mm-ss}_.backup");
+            var root = doc.DocumentElement.ChildNodes;
+            foreach (var node in nodes)
             {
-                var result = replacer.GenerateFontMap(openFileDialog1.FileName);
-                if (!result.Item1)
+                foreach (var attribute in node.Attributes)
                 {
-                    MessageBox.Show(result.Item2, "Error loading Map file.",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Exclamation);
+                    root[node.Entry].Attributes[attribute.Name].Value = (string.IsNullOrWhiteSpace(attribute.Value))
+                        ? attribute.ValueOri
+                        : attribute.Value;
+                    if (root[node.Entry].Attributes[attribute.Name + "_ori"] == null)
+                    {
+                        var attr = doc.CreateAttribute(attribute.Name + "_ori");
+                        attr.Value = attribute.ValueOri;
+                        root[node.Entry].Attributes.Append(attr);
+                    }
                 }
 
-                dictionaryLabel.Text = $"Dictionary: {(result.Item1?"Yes":"No")}";
             }
+
+            doc.Save(oriPath);
         }
+
+        private void xmlAttributeText_TextChanged(object sender, EventArgs e)
+        {
+            modified = true;
+            labelTranslated.Text = "Translated - Modified";
+        }
+
+        private void xmlAttributeText_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = (e.KeyData == (Keys.Control | Keys.Enter));
+        }
+
+        #endregion
+
     }
 }
