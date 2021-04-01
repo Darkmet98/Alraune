@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -15,16 +18,36 @@ namespace Alraune
         private StringReplacer replacer;
         private string oriPath;
         private bool modified;
+        private string fontFile =
+            $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}{Path.DirectorySeparatorChar}FOT-TsukuMinPro-B.otf";
+        private string mapFile =
+            $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}{Path.DirectorySeparatorChar}Dictionary.map";
 
         public Form1()
         {
             InitializeComponent();
             nodes = new List<XmlNodeGust>();
             replacer = new StringReplacer();
-            if (File.Exists("Dictionary.map"))
-                LoadDictionary("Dictionary.map");
+            if (File.Exists(mapFile))
+                LoadDictionary(mapFile);
+            LoadFont();
         }
 
+
+        private void LoadFont()
+        {
+            if (!File.Exists(fontFile))
+                return;
+
+            var newFont = new PrivateFontCollection();
+
+            newFont.AddFontFile(fontFile);
+            var font = new Font(newFont.Families[0], 16);
+            xmlAttributeText.Font = font;
+            xmlOriAttributeText.Font = font;
+
+        }
+        
         private void LoadXml(string path)
         {
             oriPath = path;

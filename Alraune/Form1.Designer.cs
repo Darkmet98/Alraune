@@ -57,9 +57,9 @@ namespace Alraune
             this.charaCountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.charaCountLabel.AutoSize = true;
             this.charaCountLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.charaCountLabel.Location = new System.Drawing.Point(685, 565);
+            this.charaCountLabel.Location = new System.Drawing.Point(783, 753);
             this.charaCountLabel.Name = "charaCountLabel";
-            this.charaCountLabel.Size = new System.Drawing.Size(122, 25);
+            this.charaCountLabel.Size = new System.Drawing.Size(151, 32);
             this.charaCountLabel.TabIndex = 1;
             this.charaCountLabel.Text = "Characters: X";
             // 
@@ -70,10 +70,12 @@ namespace Alraune
             | System.Windows.Forms.AnchorStyles.Right)));
             this.xmlAttributeText.Enabled = false;
             this.xmlAttributeText.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.xmlAttributeText.Location = new System.Drawing.Point(433, 284);
+            this.xmlAttributeText.Location = new System.Drawing.Point(495, 379);
+            this.xmlAttributeText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.xmlAttributeText.Multiline = true;
             this.xmlAttributeText.Name = "xmlAttributeText";
-            this.xmlAttributeText.Size = new System.Drawing.Size(809, 278);
+            this.xmlAttributeText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.xmlAttributeText.Size = new System.Drawing.Size(924, 369);
             this.xmlAttributeText.TabIndex = 3;
             this.xmlAttributeText.Click += new System.EventHandler(this.xmlAttributeText_Click);
             this.xmlAttributeText.CursorChanged += new System.EventHandler(this.xmlAttributeText_CursorChanged);
@@ -85,14 +87,15 @@ namespace Alraune
             // 
             this.entryIndex.Enabled = false;
             this.entryIndex.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.entryIndex.Location = new System.Drawing.Point(295, 100);
+            this.entryIndex.Location = new System.Drawing.Point(337, 133);
+            this.entryIndex.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.entryIndex.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.entryIndex.Name = "entryIndex";
-            this.entryIndex.Size = new System.Drawing.Size(132, 33);
+            this.entryIndex.Size = new System.Drawing.Size(151, 39);
             this.entryIndex.TabIndex = 7;
             this.entryIndex.Value = new decimal(new int[] {
             1,
@@ -108,10 +111,11 @@ namespace Alraune
             this.attributeXmlList.Enabled = false;
             this.attributeXmlList.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.attributeXmlList.FormattingEnabled = true;
-            this.attributeXmlList.ItemHeight = 25;
-            this.attributeXmlList.Location = new System.Drawing.Point(12, 136);
+            this.attributeXmlList.ItemHeight = 32;
+            this.attributeXmlList.Location = new System.Drawing.Point(14, 181);
+            this.attributeXmlList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.attributeXmlList.Name = "attributeXmlList";
-            this.attributeXmlList.Size = new System.Drawing.Size(415, 454);
+            this.attributeXmlList.Size = new System.Drawing.Size(474, 580);
             this.attributeXmlList.TabIndex = 8;
             this.attributeXmlList.Click += new System.EventHandler(this.attributeXmlList_Click);
             // 
@@ -120,9 +124,10 @@ namespace Alraune
             this.updateEntryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.updateEntryButton.Enabled = false;
             this.updateEntryButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.updateEntryButton.Location = new System.Drawing.Point(1145, 568);
+            this.updateEntryButton.Location = new System.Drawing.Point(1309, 757);
+            this.updateEntryButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.updateEntryButton.Name = "updateEntryButton";
-            this.updateEntryButton.Size = new System.Drawing.Size(97, 35);
+            this.updateEntryButton.Size = new System.Drawing.Size(111, 47);
             this.updateEntryButton.TabIndex = 9;
             this.updateEntryButton.Text = "Save text";
             this.updateEntryButton.UseVisualStyleBackColor = true;
@@ -132,9 +137,9 @@ namespace Alraune
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(234, 103);
+            this.label2.Location = new System.Drawing.Point(267, 137);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 25);
+            this.label2.Size = new System.Drawing.Size(68, 32);
             this.label2.TabIndex = 10;
             this.label2.Text = "Entry";
             // 
@@ -142,17 +147,18 @@ namespace Alraune
             // 
             this.entriesCount.AutoSize = true;
             this.entriesCount.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.entriesCount.Location = new System.Drawing.Point(234, 65);
+            this.entriesCount.Location = new System.Drawing.Point(267, 87);
             this.entriesCount.Name = "entriesCount";
-            this.entriesCount.Size = new System.Drawing.Size(148, 30);
+            this.entriesCount.Size = new System.Drawing.Size(189, 37);
             this.entriesCount.TabIndex = 11;
             this.entriesCount.Text = "Total entries: X";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 13);
+            this.button2.Location = new System.Drawing.Point(14, 17);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(196, 23);
+            this.button2.Size = new System.Drawing.Size(224, 31);
             this.button2.TabIndex = 12;
             this.button2.Text = "Load XML.e file";
             this.button2.UseVisualStyleBackColor = true;
@@ -161,9 +167,10 @@ namespace Alraune
             // saveXmlButton
             // 
             this.saveXmlButton.Enabled = false;
-            this.saveXmlButton.Location = new System.Drawing.Point(231, 13);
+            this.saveXmlButton.Location = new System.Drawing.Point(264, 17);
+            this.saveXmlButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saveXmlButton.Name = "saveXmlButton";
-            this.saveXmlButton.Size = new System.Drawing.Size(196, 23);
+            this.saveXmlButton.Size = new System.Drawing.Size(224, 31);
             this.saveXmlButton.TabIndex = 13;
             this.saveXmlButton.Text = "Save XML.e file";
             this.saveXmlButton.UseVisualStyleBackColor = true;
@@ -174,9 +181,9 @@ namespace Alraune
             this.totalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.totalLabel.AutoSize = true;
             this.totalLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.totalLabel.Location = new System.Drawing.Point(838, 565);
+            this.totalLabel.Location = new System.Drawing.Point(958, 753);
             this.totalLabel.Name = "totalLabel";
-            this.totalLabel.Size = new System.Drawing.Size(72, 25);
+            this.totalLabel.Size = new System.Drawing.Size(91, 32);
             this.totalLabel.TabIndex = 14;
             this.totalLabel.Text = "Total: X";
             // 
@@ -185,9 +192,9 @@ namespace Alraune
             this.lineCountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lineCountLabel.AutoSize = true;
             this.lineCountLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lineCountLabel.Location = new System.Drawing.Point(438, 565);
+            this.lineCountLabel.Location = new System.Drawing.Point(501, 753);
             this.lineCountLabel.Name = "lineCountLabel";
-            this.lineCountLabel.Size = new System.Drawing.Size(75, 25);
+            this.lineCountLabel.Size = new System.Drawing.Size(94, 32);
             this.lineCountLabel.TabIndex = 15;
             this.lineCountLabel.Text = "Lines: X";
             // 
@@ -196,17 +203,18 @@ namespace Alraune
             this.currentLineLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.currentLineLabel.AutoSize = true;
             this.currentLineLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.currentLineLabel.Location = new System.Drawing.Point(532, 565);
+            this.currentLineLabel.Location = new System.Drawing.Point(608, 753);
             this.currentLineLabel.Name = "currentLineLabel";
-            this.currentLineLabel.Size = new System.Drawing.Size(132, 25);
+            this.currentLineLabel.Size = new System.Drawing.Size(166, 32);
             this.currentLineLabel.TabIndex = 16;
             this.currentLineLabel.Text = "Current line: X";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 42);
+            this.button1.Location = new System.Drawing.Point(14, 56);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(196, 23);
+            this.button1.Size = new System.Drawing.Size(224, 31);
             this.button1.TabIndex = 17;
             this.button1.Text = "Load .map dictionary file";
             this.button1.UseVisualStyleBackColor = true;
@@ -217,9 +225,9 @@ namespace Alraune
             this.dictionaryLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dictionaryLabel.AutoSize = true;
             this.dictionaryLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dictionaryLabel.Location = new System.Drawing.Point(46, 65);
+            this.dictionaryLabel.Location = new System.Drawing.Point(53, 87);
             this.dictionaryLabel.Name = "dictionaryLabel";
-            this.dictionaryLabel.Size = new System.Drawing.Size(132, 25);
+            this.dictionaryLabel.Size = new System.Drawing.Size(166, 32);
             this.dictionaryLabel.TabIndex = 18;
             this.dictionaryLabel.Text = "Dictionary: No";
             // 
@@ -229,11 +237,13 @@ namespace Alraune
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.xmlOriAttributeText.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.xmlOriAttributeText.Location = new System.Drawing.Point(438, 42);
+            this.xmlOriAttributeText.Location = new System.Drawing.Point(501, 56);
+            this.xmlOriAttributeText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.xmlOriAttributeText.Multiline = true;
             this.xmlOriAttributeText.Name = "xmlOriAttributeText";
             this.xmlOriAttributeText.ReadOnly = true;
-            this.xmlOriAttributeText.Size = new System.Drawing.Size(809, 211);
+            this.xmlOriAttributeText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.xmlOriAttributeText.Size = new System.Drawing.Size(924, 280);
             this.xmlOriAttributeText.TabIndex = 19;
             // 
             // label1
@@ -241,9 +251,9 @@ namespace Alraune
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(433, 13);
+            this.label1.Location = new System.Drawing.Point(495, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 25);
+            this.label1.Size = new System.Drawing.Size(98, 32);
             this.label1.TabIndex = 20;
             this.label1.Text = "Original";
             // 
@@ -252,18 +262,18 @@ namespace Alraune
             this.labelTranslated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTranslated.AutoSize = true;
             this.labelTranslated.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelTranslated.Location = new System.Drawing.Point(438, 256);
+            this.labelTranslated.Location = new System.Drawing.Point(501, 341);
             this.labelTranslated.Name = "labelTranslated";
-            this.labelTranslated.Size = new System.Drawing.Size(98, 25);
+            this.labelTranslated.Size = new System.Drawing.Size(122, 32);
             this.labelTranslated.TabIndex = 21;
             this.labelTranslated.Text = "Translated";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(710, 264);
+            this.label3.Location = new System.Drawing.Point(811, 352);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(540, 15);
+            this.label3.Size = new System.Drawing.Size(674, 20);
             this.label3.TabIndex = 22;
             this.label3.Text = "CTRL + Enter: Save translation | CTRL + Up/Down: Change attribute | CTRL + Left/R" +
     "ight: Change entry";
@@ -272,18 +282,18 @@ namespace Alraune
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(12, 112);
+            this.label4.Location = new System.Drawing.Point(14, 149);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 21);
+            this.label4.Size = new System.Drawing.Size(99, 28);
             this.label4.TabIndex = 23;
             this.label4.Text = "Attributes";
             // 
             // Form1
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1260, 605);
+            this.ClientSize = new System.Drawing.Size(1440, 807);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelTranslated);
@@ -305,6 +315,7 @@ namespace Alraune
             this.Controls.Add(this.charaCountLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Alraune XML.e Editor";
