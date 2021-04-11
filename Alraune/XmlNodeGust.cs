@@ -36,6 +36,7 @@ namespace Alraune
         name8,
         name9,
         Text,
+        Text2,
         text,
         text_0,
         text_1,
@@ -90,6 +91,7 @@ namespace Alraune
         skill_desc,
         LineHelp,
         FlavorText,
-        message
+        message,
+        Owner
     }
 }

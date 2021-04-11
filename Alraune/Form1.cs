@@ -23,6 +23,9 @@ namespace Alraune
         private string mapFile =
             $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}{Path.DirectorySeparatorChar}Dictionary.map";
 
+        private int currentIndexList;
+        private bool msgEnabled;
+
         public Form1()
         {
             InitializeComponent();
@@ -138,10 +141,10 @@ namespace Alraune
             {
                 var dialogResult = MessageBox.Show("You have modified the translation.\nDo you want to change the entry without saving your text?", "Translation modified", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.No)
-                {
                     return;
-                }
-                
+
+
+
             }
 
             attributeXmlList.DataSource = nodes[Convert.ToInt32(entryIndex.Value - 1)].Attributes;
@@ -150,16 +153,24 @@ namespace Alraune
 
         private void FillText()
         {
+            if (msgEnabled)
+            {
+                msgEnabled = false;
+                return;
+            }
 
             if (modified)
             {
                 var dialogResult = MessageBox.Show("You have modified the translation.\nDo you want to change the entry without saving your text?", "Translation modified", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.No)
                 {
+                    msgEnabled = true;
+                    attributeXmlList.SelectedIndex = currentIndexList;
                     return;
                 }
             }
 
+            currentIndexList = attributeXmlList.SelectedIndex;
             var x = attributeXmlList.SelectedItem as XmlAttributeGust;
             xmlAttributeText.Text = replacer.GetOriginal(x?.Value);
             xmlOriAttributeText.Text = replacer.GetOriginal(x?.ValueOri);
